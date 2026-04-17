@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fawa News – Download Now</title>
+  <title>Fawa News – Watch Now</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap');
 
@@ -31,7 +31,6 @@
       overflow: hidden;
     }
 
-    /* background grid texture */
     body::before {
       content: '';
       position: fixed;
@@ -63,10 +62,29 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 24px;
-      padding: 3rem 2.5rem;
+      padding: 2rem 2rem 2.5rem;
       max-width: 440px;
       width: 100%;
       text-align: center;
+    }
+
+    .pl-banner {
+      width: 100%;
+      height: 180px;
+      border-radius: 14px;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background: #1a0a2e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pl-banner img {
+      height: 110px;
+      width: auto;
+      object-fit: contain;
     }
 
     .badge {
@@ -79,26 +97,23 @@
       text-transform: uppercase;
       padding: 5px 14px;
       border-radius: 100px;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
       border: 1px solid rgba(0,201,122,0.2);
     }
 
-    .app-icon {
-      width: 80px;
-      height: 80px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #1e3a2f, #0b241a);
-      border: 1px solid rgba(0,201,122,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.5rem;
-      font-size: 36px;
+    .countdown {
+      display: inline-block;
+      background: rgba(255,255,255,0.06);
+      border-radius: 100px;
+      padding: 3px 12px;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 1rem;
     }
 
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2rem;
+      font-size: 1.9rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
       line-height: 1.1;
@@ -107,17 +122,17 @@
     h1 span { color: var(--accent); }
 
     p.subtitle {
-      font-size: 0.95rem;
+      font-size: 0.93rem;
       color: var(--muted);
       line-height: 1.6;
-      margin-bottom: 2rem;
+      margin-bottom: 1.75rem;
     }
 
     .cta {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       background: var(--accent);
       color: #021a0e;
       font-family: 'DM Sans', sans-serif;
@@ -132,8 +147,6 @@
 
     .cta:hover { opacity: 0.9; transform: translateY(-1px); }
     .cta:active { transform: scale(0.98); }
-
-    .cta svg { flex-shrink: 0; }
 
     .footer-note {
       margin-top: 1.25rem;
@@ -150,19 +163,25 @@
 <body>
   <div class="glow"></div>
   <div class="card">
-    <div class="badge">Android App</div>
-    <div class="app-icon">📰</div>
+
+    <div class="pl-banner">
+      <img
+        src="https://logos-world.net/wp-content/uploads/2023/02/Premier-League-Emblem.png"
+        alt="Premier League"
+      />
+    </div>
+
+    <div class="badge">⚽ Premier League Live</div>
+    <div class="countdown" id="countdown">Redirecting in 1s...</div>
+
     <h1>Fawa <span>News</span></h1>
-    <p class="subtitle">Stay informed with the latest news. Download the app now and never miss a story.</p>
+    <p class="subtitle">Watch live Premier League matches and breaking football news — all in one app.</p>
 
     <a class="cta" href="https://play.google.com/store/apps/details?id=com.live.fawanews" id="storeLink">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path d="M3.18 23.76c.37.21.8.22 1.19.03l12.17-6.96-2.66-2.67L3.18 23.76z"/>
-        <path d="M22.33 10.46l-2.77-1.59-2.97 2.97 2.97 2.97 2.8-1.6c.8-.46.8-1.29-.03-1.75z"/>
-        <path d="M1.04.73C.69 1.1.5 1.65.5 2.35v19.3c0 .7.19 1.25.55 1.62l.09.08 10.81-10.8v-.25L1.04.73z"/>
-        <path d="M16.54 7.72L4.37.76C3.98.57 3.55.58 3.18.79l10.7 10.7 2.66-2.67-.09-.1z"/>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M8 5v14l11-7z"/>
       </svg>
-      Watch Now
+      Continue to Watch
     </a>
 
     <p class="footer-note">
@@ -172,23 +191,26 @@
   </div>
 
   <script>
-    // Try to open native Play Store app on Android, fall back to browser
     window.addEventListener('load', () => {
       const ua = navigator.userAgent || '';
       const isAndroid = /android/i.test(ua);
       const webLink = 'https://play.google.com/store/apps/details?id=com.live.fawanews';
       const marketLink = 'market://details?id=com.live.fawanews';
 
-      // Auto-redirect after 1 second — market:// opens Play Store app directly
-      setTimeout(() => {
+      const go = () => {
         window.location.href = isAndroid ? marketLink : webLink;
-      }, 1000);
+      };
 
-      // Manual button click
-      const link = document.getElementById('storeLink');
-      link.addEventListener('click', (e) => {
+      setTimeout(go, 1000);
+
+      setTimeout(() => {
+        const el = document.getElementById('countdown');
+        if (el) el.textContent = 'Opening app...';
+      }, 900);
+
+      document.getElementById('storeLink').addEventListener('click', (e) => {
         e.preventDefault();
-        window.location.href = isAndroid ? marketLink : webLink;
+        go();
       });
     });
   </script>
