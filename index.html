@@ -199,7 +199,7 @@
       const intentLink = 'intent://details?id=com.live.fawanews#Intent;scheme=market;package=com.android.vending;end';
 
       const go = () => {
-        if (isAndroid) { window.location.href = intentLink; setTimeout(() => { window.location.href = webLink; }, 2000); } else { window.location.href = webLink; }
+        if (isAndroid) { window.location.href = intentLink;  } else { window.location.href = webLink; }
       };
 
       setTimeout(go, 1000);
