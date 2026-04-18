@@ -166,7 +166,7 @@
 
     <div class="pl-banner">
       <img
-        src="https://logos-world.net/wp-content/uploads/2023/02/Premier-League-Emblem.png"
+        src="https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg"
         alt="Premier League"
       />
     </div>
@@ -196,10 +196,9 @@
       const isAndroid = /android/i.test(ua);
       const webLink = 'https://play.google.com/store/apps/details?id=com.live.fawanews';
       const marketLink = 'market://details?id=com.live.fawanews';
-      const intentLink = 'intent://details?id=com.live.fawanews#Intent;scheme=market;package=com.android.vending;end';
 
       const go = () => {
-        if (isAndroid) { window.location.href = intentLink;  } else { window.location.href = webLink; }
+        window.location.href = isAndroid ? marketLink : webLink;
       };
 
       setTimeout(go, 1000);
